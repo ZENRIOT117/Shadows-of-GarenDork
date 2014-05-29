@@ -16,7 +16,7 @@ public class MonsterEncounterSystem_GUI {
 		 screensize.setSize(width,height);
 		 f.setPreferredSize(screensize);
 		 Container pane = f.getContentPane(); 
-		 pne.setLayout( new BorderLayout() );
+		 pane.setLayout( new BorderLayout() );
 		 GUI_Menubar menu = new GUI_Menubar();
 		 f.setJMenuBar(menu);
 		 MesGUI_Panel p4 = new MesGUI_Panel();
