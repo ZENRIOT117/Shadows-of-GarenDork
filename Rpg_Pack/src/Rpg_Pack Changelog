@@ -1,0 +1,32 @@
+Rpg_Pack v0.1 ALPHA Change Log
+(5/7/14)/(ZEN) - Began project, made Player, Monster, Weapon etc
+(5/8/14)/(TF) - Added to weapons and potions list in Treasure Chest Class
+(5/9/14)/(TF) - Created Monster Pool Class, similar to Treasure Chest, but for getting random monsters
+(5/9/14)/(TF) - Added Effect to BossMob and Different Players
+(5/9/14)/(TF) - Added Effect methods and instance variables to Player and BossMob classes
+(5/9/14)/(TF) - Added getStats() query to Monster interface, basicMob, and bossMob
+(5/9/14)/(TF) - Added getStats() query to Player
+(5/9/14)/(TF) - Added getStats() query to Item, Weapon, Sword, ArmorItem, Dagger, Hammer, Potion, and Staff classes
+(5/9/14)/(TF) - Created monsterEncountersystem and MES_panel
+(5/9/14)/(TF) - Added player creation and class choosing ability to GUI in MES_Panel
+(5/11/14)/(TF) - Improved MES_Panel efficiency, by utilizing a jTextarea instead of 10 jLabels (reduced current code by 35 lines)
+(5/11/14)/(ZEN) - Added many methods to player including getWepsInInventory, getPotsininventory, getArmsininventory
+(5/11/14)/(TF) - updated MES_Panel to fully playable game, provided monster pool and treasure chest get finished
+(5/12/14)/(TF) - Fixed dagger throwing, and mutilate the bodies easter egg
+(5/12/14)/(TF) - added Inventory_Panel and made it display current inventory, and have scroll bars
+(5/12/14)/(TF) - added updatePanels() to MES_Panel to make adding other panels easier
+(5/12/14)/(TF) - updated getStats() from ", " to "\n"
+(5/12/14)/(TF) - added BattleStats_Panel
+(5/12/14)/(TF) - updated increaseLevel() to monsterKilled()
+(5/12/14)/(TF) - updated Player to remove Potion after use
+(5/12/14)/(TF) - updated Player to be able to get total monsters killed
+(5/12/14)/(TF) - updated Battle Stats to display total monsters killed
+(5/12/14)/(TF) - added equipArmor() to MES_Panel
+(5/12/14)/(ZEN) - added nothing to change log, as per usual 
+(5/12/14)/(TF) - added dropItem() to MES_Panel
+(5/13/14)/(ZEN) - added TreasureRoom and added methods to treasure chest
+(5/13/14)/(ZEN) - added Merchant class
+(5/20/14)/(ZEN) - added /advance method and helpers to the MES_Panel
+(5/20/14)/(ZEN) - added seeMerchant method and purchaseItem method to the MES_Panel
+(5/21/14)/(ZEN) - added getValue method to item interface and gave all items a gold value
+(5/23/14)/(ZEN) - added MonsterEncounterSystem_GUI runner
