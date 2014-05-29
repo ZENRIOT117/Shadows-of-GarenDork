@@ -33,3 +33,4 @@ Rpg_Pack v0.1 ALPHA Change Log
 (5/28/14)/(TF) - added ability to move player in MesGUI_Panel
 (5/28/14)/(TF) - added ability to attack using 'a' in MesGUI_Panel
 (5/28/14)/(TF) - added ability to attack with 's' in MesGUI Pabeel
+(5/28/14)/(TF) - added GUI_Menubar to have added functionaloty in GUI 
