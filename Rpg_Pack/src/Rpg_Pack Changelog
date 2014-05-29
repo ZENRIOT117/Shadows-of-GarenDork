@@ -30,3 +30,6 @@ Rpg_Pack v0.1 ALPHA Change Log
 (5/20/14)/(ZEN) - added seeMerchant method and purchaseItem method to the MES_Panel
 (5/21/14)/(ZEN) - added getValue method to item interface and gave all items a gold value
 (5/23/14)/(ZEN) - added MonsterEncounterSystem_GUI runner
+(5/28/14)/(TF) - added ability to move player in MesGUI_Panel
+(5/28/14)/(TF) - added ability to attack using 'a' in MesGUI_Panel
+(5/28/14)/(TF) - added ability to attack with 's' in MesGUI Pabeel
