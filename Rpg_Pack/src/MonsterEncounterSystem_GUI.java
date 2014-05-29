@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*; 
 
 public class MonsterEncounterSystem_GUI {
+	public static GUI_Menubar menu;
 	public static void main(String[] args){
 		 JFrame frame = new JFrame(); 
 		 frame.setDefaultCloseOperation( JFrame. EXIT_ON_CLOSE );
@@ -17,7 +18,7 @@ public class MonsterEncounterSystem_GUI {
 		 f.setPreferredSize(screensize);
 		 Container pane = f.getContentPane(); 
 		 pane.setLayout( new BorderLayout() );
-		 GUI_Menubar menu = new GUI_Menubar();
+		 menu = new GUI_Menubar();
 		 f.setJMenuBar(menu);
 		 MesGUI_Panel p4 = new MesGUI_Panel();
 		 pane.add( p4, BorderLayout.CENTER);

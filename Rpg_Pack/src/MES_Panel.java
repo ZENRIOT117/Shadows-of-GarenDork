@@ -456,12 +456,10 @@ public class MES_Panel extends JPanel {
 	  getFromTextBox();
   }  
 }
-  private class Key1 implements KeyListener {
+  private class Key1 extends KeyAdapter {
 	  public void keyPressed( KeyEvent e){
 		  if (e.getKeyCode() == KeyEvent.VK_ENTER)
 			  getFromTextBox();
-	  }
-	  public void keyReleased( KeyEvent e){  
 	  }
 	  public void keyTyped( KeyEvent e){
 		  if (e.getKeyCode() == KeyEvent.VK_ENTER)

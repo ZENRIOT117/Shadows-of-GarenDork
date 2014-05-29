@@ -36,6 +36,7 @@ public class Splash_Screen extends JWindow{
 	                        }
 	                }
 	            };
+	        setAlwaysOnTop(true);
 	        setVisible(true);
 	        Thread splashThread = new Thread(waitRunner, "SplashThread");
 	        splashThread.run();

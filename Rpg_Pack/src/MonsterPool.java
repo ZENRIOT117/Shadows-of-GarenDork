@@ -15,43 +15,43 @@ public class MonsterPool {
 	private Monster mon12 = new BasicMob("Angery Zombie",3,3,1,0);
 	private Monster mon13 = new BasicMob("Cloaker With a Taser",3,3,1,0);
 	private Monster mon14 = new BasicMob("Hissing Creeper",3,3,1,0);
-	private Monster mon15 = new BasicMob("",3,3,1,0);
+	private Monster mon15 = new BasicMob("Really Slow Freight Train",3,3,1,0);
 	//Level Split (For organizational sanity)
-	private Monster mon16 = new BasicMob("Potted Plant",4,3,1,0);
-	private Monster mon17 = new BasicMob("Potted Plant",4,3,1,0);
-	private Monster mon18 = new BasicMob("Potted Plant",4,3,1,0);
-	private Monster mon19 = new BasicMob("Potted Plant",4,3,1,0);
-	private Monster mon20 = new BasicMob("Potted Plant",4,3,1,0);
+	private Monster mon16 = new BasicMob("Vladimir Putin Riding a Bear",4,3,1,0);
+	private Monster mon17 = new BasicMob("Really Spicy Burrito",4,3,1,0);
+	private Monster mon18 = new BasicMob("Al Capone With Wings",4,3,1,0);
+	private Monster mon19 = new BasicMob("Debanik Armed With His English Homework",4,3,1,0);
+	private Monster mon20 = new BasicMob("A Really Pissed Off Ball of Moss",4,3,1,0);
 	//Level Split (For organizational sanity)
-	private Monster mon21 = new BasicMob("Potted Plant",5,3,1,0);
-	private Monster mon22 = new BasicMob("Potted Plant",5,3,1,0);
-	private Monster mon23 = new BasicMob("Potted Plant",5,3,1,0);
-	private Monster mon24 = new BasicMob("Potted Plant",5,3,1,0);
-	private Monster mon25 = new BasicMob("Potted Plant",5,3,1,0);
+	private Monster mon21 = new BasicMob("Lo Wang (And he wants his sword back)",5,3,1,0);
+	private Monster mon22 = new BasicMob("Random Member of ZZ Top",5,3,1,0);
+	private Monster mon23 = new BasicMob("A Really Long Book Full of Useless Information",5,3,1,0);
+	private Monster mon24 = new BasicMob("Mr. Foley",5,3,1,0);
+	private Monster mon25 = new BasicMob("Wolf With About 6 Teeth",5,3,1,0);
 	//Level Split (For organizational sanity)
-	private Monster mon26 = new BasicMob("Potted Plant",6,3,1,0);
-	private Monster mon27 = new BasicMob("Potted Plant",6,3,1,0);
-	private Monster mon28 = new BasicMob("Potted Plant",6,3,1,0);
-	private Monster mon29 = new BasicMob("Potted Plant",6,3,1,0);
-	private Monster mon30 = new BasicMob("Potted Plant",6,3,1,0);
+	private Monster mon26 = new BasicMob("Bank Robber",6,3,1,0);
+	private Monster mon27 = new BasicMob("Tuco Salamanca (You were messin' with his Tio)",6,3,1,0);
+	private Monster mon28 = new BasicMob("Undead Redneck",6,3,1,0);
+	private Monster mon29 = new BasicMob("Talking Cow",6,3,1,0);
+	private Monster mon30 = new BasicMob("Mike Ehrmantraut",6,3,1,0);
 	//Level Split (For organizational sanity)
-	private Monster mon31 = new BasicMob("Potted Plant",7,3,1,0);
-	private Monster mon32 = new BasicMob("Potted Plant",7,3,1,0);
-	private Monster mon33 = new BasicMob("Potted Plant",7,3,1,0);
-	private Monster mon34 = new BasicMob("Potted Plant",7,3,1,0);
-	private Monster mon35 = new BasicMob("Potted Plant",7,3,1,0);
+	private Monster mon31 = new BasicMob("Yahtzee Croshaw",7,3,1,0);
+	private Monster mon32 = new BasicMob("GENSEC Convoy",7,3,1,0);
+	private Monster mon33 = new BasicMob("Slightly Loopy Programmer",7,3,1,0);
+	private Monster mon34 = new BasicMob("Gordon Ramsay",7,3,1,0);
+	private Monster mon35 = new BasicMob("Evil Hobgoblin",7,3,1,0);
 	//Level Split (For organizational sanity)
-	private Monster mon36 = new BasicMob("Potted Plant",8,3,1,0);
-	private Monster mon37 = new BasicMob("Potted Plant",8,3,1,0);
-	private Monster mon38 = new BasicMob("Potted Plant",8,3,1,0);
-	private Monster mon39 = new BasicMob("Potted Plant",8,3,1,0);
-	private Monster mon40 = new BasicMob("Potted Plant",8,3,1,0);
+	private Monster mon36 = new BasicMob("Drunken Dwarf",8,3,1,0);
+	private Monster mon37 = new BasicMob("Ravenous Were-Wolf",8,3,1,0);
+	private Monster mon38 = new BasicMob("Agent 47",8,3,1,0);
+	private Monster mon39 = new BasicMob("Gabe Newell (Bow down before the Mighty Gaben)",8,3,1,0);
+	private Monster mon40 = new BasicMob("Cave Troll",8,3,1,0);
 	//Level Split (For organizational sanity)
-	private Monster mon41 = new BasicMob("Potted Plant",9,3,1,0);
-	private Monster mon42 = new BasicMob("Potted Plant",9,3,1,0);
-	private Monster mon43 = new BasicMob("Potted Plant",9,3,1,0);
-	private Monster mon44 = new BasicMob("Potted Plant",9,3,1,0);
-	private Monster mon45 = new BasicMob("Potted Plant",9,3,1,0);
+	private Monster mon41 = new BasicMob("Audrey II (Who is laughing at the potted plant now)",9,3,1,0);
+	private Monster mon42 = new BasicMob("Bain",9,3,1,0);
+	private Monster mon43 = new BasicMob("Vaas Montenegro",9,3,1,0);
+	private Monster mon44 = new BasicMob("Really Tall Elf",9,3,1,0);
+	private Monster mon45 = new BasicMob("Sauron",9,3,1,0);
 	//Level Split (For organizational sanity)
 	private Monster mon46 = new BasicMob("Were-Rabbit",10,30,20,4);
 	private Monster mon47 = new BasicMob("Furious Godzilla",10,40,13,6);

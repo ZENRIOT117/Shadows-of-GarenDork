@@ -69,7 +69,7 @@ public class MesGUI_Panel extends JPanel {
   
   public void buttonClicked(Object obj){
 	  if (obj instanceof Player_Button){
-		  txtarea.setText(MesGUI_Panel.USER.getStats());
+		  txtarea.setText(MesGUI_Panel.USER.getStats()+"\n\n\n\n"+W.getName());
 		  btn1.setVisible(false);
 		  txt1.setVisible(false);
 		  frame.setSize(800,500);
@@ -142,6 +142,7 @@ public class MesGUI_Panel extends JPanel {
 			(frame.getContentPane()).add(p3);
 			frame.setResizable(false);
 			frame.setVisible(true);
+			p3.grabFocus();
 			txt1.grabFocus();
 	  }
 	  public void setPlayerName(String n){
@@ -170,8 +171,7 @@ public class MesGUI_Panel extends JPanel {
 		  }
 		  M = pool.getMonster(USER.getLevel());
 		  ArrayList<Weapon> weps = USER.getWepsInInventory();
-		  W = weps.get(1);
-		  JF
+		  (MonsterEncounterSystem_GUI.menu).addSelectedWeapon(weps.get(1).getName());
 		  grid[0][cols/2] = M.getButton();
 		  grid[0][cols/2].addActionListener(new Buttons());
 		  grid[0][cols/2].addKeyListener(new Keys());

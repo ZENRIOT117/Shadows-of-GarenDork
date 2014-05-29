@@ -42,7 +42,7 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 		m2.add(rbmi1);
 		JMenu m3 = new JMenu("Help");
 		JMenuItem mi3 = new JMenuItem("Garendork Help");
-		mi1.addActionListener(this);
+		mi3.addActionListener(this);
 		m3.add(mi3);
 		m3.addSeparator();
 		JMenuItem mi4 = new JMenuItem("About");
@@ -54,7 +54,7 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 	}
 	public void displayHelpWindow(){
 		frame.setTitle("Help");
-		txtarea.setText("  ↑ Moves player forwards (clicking on the square in front also works)\n"
+		txtarea.setText("  ↑ - Moves player forwards (clicking on the square in front also works)\n"
 	    		+ "  ↓ - Moves player backwards (clicking on the square in back also works)\n"
 	    		+ "  ← - Moves Player left (clicking on the square to the left also works)\n"
 	    		+ "  → - Moves Player right (clicking on the square to the right also works)\n"
@@ -76,6 +76,12 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 		group.add(rbmi);
 		m2.add(rbmi);
 	}
+	public void addSelectedWeapon(String name){
+		JRadioButtonMenuItem rbmi = new JRadioButtonMenuItem(name);
+		group.add(rbmi);
+		m2.add(rbmi);
+		rbmi.setSelected(true);
+	}
 	@SuppressWarnings("deprecation")
 	public void setCurrentWeapon(Object obj){
 		JRadioButtonMenuItem rb = (JRadioButtonMenuItem)obj;
@@ -90,7 +96,7 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 	}
     @SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) { 
-    	if ((((JMenuItem)e.getSource()).getLabel()).equals("Help"))
+    	if ((((JMenuItem)e.getSource()).getLabel()).equals("Garendork Help"))
     		displayHelpWindow();
     	else if ((((JMenuItem)e.getSource()).getLabel()).equals("About"))
     		displayAboutWindow();
