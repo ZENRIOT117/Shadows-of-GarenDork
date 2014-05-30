@@ -1,5 +1,4 @@
 import javax.swing.*; 
-
 import java.awt.*; 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class MesGUI_Panel extends JPanel {
 	//current monster MES_Panel.USER is fighting
 	public static Weapon W;
 	//current weapon MES_Panel.USER is using
-	private boolean bool = true;
+	//private boolean bool = true;
 	//used for figuring out if MES_Panel.USER mutilated the bodies for an extra level yet
 	private TreasureChest chest = new TreasureChest();
 	//instance of treasure chest for rewards
@@ -171,7 +170,10 @@ public class MesGUI_Panel extends JPanel {
 		  }
 		  M = pool.getMonster(USER.getLevel());
 		  ArrayList<Weapon> weps = USER.getWepsInInventory();
-		  (MonsterEncounterSystem_GUI.menu).addSelectedWeapon(weps.get(1).getName());
+		  //(MonsterEncounterSystem_GUI.menu).addSelectedWeapon(weps.get(1).getName());
+		  //un-comment above line and comment next line if running using MonsterEncounterSystem_GUI
+		  (Main_Runner.menu).addSelectedWeapon(weps.get(1).getName());
+		  W = weps.get(1);
 		  grid[0][cols/2] = M.getButton();
 		  grid[0][cols/2].addActionListener(new Buttons());
 		  grid[0][cols/2].addKeyListener(new Keys());
@@ -206,7 +208,6 @@ public class MesGUI_Panel extends JPanel {
 			  txtarea.setText("Oh no, an evil chest goblin chucked a splash potion at you! He threw a(n):\n"
 				  		+ "\n"+x.getType()+": "+x.getStats()+"\nDescription of damage: "+x.getDescription()+"\n\nEnter /advance to move forward, or /help for commands");
 		  }
-		  updatePanels();
 	  }
 	  public void seeMerchant(){
 		  if(USER.getMerchVisits()>0){
@@ -218,8 +219,7 @@ public class MesGUI_Panel extends JPanel {
 			  txtarea.append("\nIf you wish to purchase an item, use that /buy=(item name) command.");
 		  }
 		  else
-			  txtarea.setText("You cannot seem to find the merchant... oh well.");
-		  updatePanels();	  
+			  txtarea.setText("You cannot seem to find the merchant... oh well.");  
 	  }
 	  public void purchaseItem(String name){
 		  ArrayList<Item> wares= mihir.getWares();
@@ -236,7 +236,6 @@ public class MesGUI_Panel extends JPanel {
 					  txtarea.setText("You do not have enough gold to purchase that item"); 
 			  }
 		  }
-		  updatePanels();
 	  }
 	  public void updateBattleStats(){
 		  
@@ -274,6 +273,8 @@ public class MesGUI_Panel extends JPanel {
 	  public void awardTreasure(){
 		  int gold = getGold();
 		  Item reward = chest.getReward();
+		  if(reward instanceof Weapon)
+			  (MonsterEncounterSystem_GUI.menu).addWeapon(reward.getName());
 		  USER.addToInventory(reward);
 		  USER.addGold(gold);
 		  grid[M.getButton().getRow()][M.getButton().getCol()] = new Tree_Button(new ImageIcon("src/img/Tree3.png"));
@@ -394,31 +395,27 @@ public class MesGUI_Panel extends JPanel {
 	  }
 	  public void equipArmor(){
 		  String ename = str1.substring(12);
-		  ArrayList<ArmorItem>arms = MES_Panel.USER.getArmsInInventory();
+		  ArrayList<ArmorItem>arms = USER.getArmsInInventory();
 		  for(ArmorItem arm:arms){
 			  if ((arm.getName().toLowerCase()).equals(ename)){
-				  MES_Panel.USER.useArmorItem(arm);
+				  USER.useArmorItem(arm);
 				  txtarea.setText("You equipped a: "+arm.getName()+" Armor Item!\n Enter /fight to fight a monster, or /help for commands");
-				  updatePanels();
 				  return;
 			  }
 		  }
 		  txtarea.setText("That Armor Item name is invalid, please try again\n\nEnter /fight to fight a monster, or /help for commands");
-		  updatePanels();
 	  }
 	  public void usePotionOn(){
 		  String pname = str1.substring(13);
-		  ArrayList<Potion>pots = MES_Panel.USER.getPotsInInventory();
+		  ArrayList<Potion>pots = USER.getPotsInInventory();
 		  for(Potion pot:pots){
 			  if ((pot.getName().toLowerCase()).equals(pname)){
-				  m.usePotionOn(pot);
-				  txtarea.setText("You used a: "+pot.getName()+" potion on "+m.getName()+"!\n Enter /fight to fight a monster, or /help for commands");
-				  updatePanels();
+				  M.usePotionOn(pot);
+				  txtarea.setText("You used a: "+pot.getName()+" potion on "+M.getName()+"!\n Enter /fight to fight a monster, or /help for commands");
 				  return;
 			  }
 		  }
 		  txtarea.setText("That Potion name is invalid, please try again\nEnter /fight to fight a monster, or /help for commands");
-		  updatePanels(); 
 	  }
 	  public void dropItem(){
 		  String iname = str1.substring(9);
@@ -427,13 +424,12 @@ public class MesGUI_Panel extends JPanel {
 			  return;
 		  }
 		  else{ 
-			  ArrayList<Item>items = (MES_Panel.USER).getInventory();
+			  ArrayList<Item>items = (USER).getInventory();
 			  for(Item i:items){
 				  if (i.getName().equals(iname))
-					  (MES_Panel.USER).removeFromInventory(i); 
+					  (USER).removeFromInventory(i); 
 			  }
-		  }	 
-		updatePanels();	 
+		  }	  
 	  }
 	  public int getGold(){
 		  if(M == null)
@@ -564,14 +560,10 @@ public class MesGUI_Panel extends JPanel {
 			   movePlayerDown();
 		 else if (e.getKeyCode() == KeyEvent.VK_KP_UP || e.getKeyCode() == KeyEvent.VK_UP) 
 			   movePlayerUp();
-		 else if (e.getKeyCode() == KeyEvent.VK_A){
+		 else if (e.getKeyCode() == KeyEvent.VK_A)
 			 attackMonster();
-			 System.out.println(USER.getButton().getRow()+" , "+USER.getButton().getCol()+" , "+M.getButton().getRow()+" , "+M.getButton().getCol());
-		 }
-		 else if (e.getKeyCode() == KeyEvent.VK_S){
+		 else if (e.getKeyCode() == KeyEvent.VK_S)
 			 specialAttack();
-			 System.out.println(USER.getButton().getRow()+" , "+USER.getButton().getCol()+" , "+M.getButton().getRow()+" , "+M.getButton().getCol());
-		 }
 	  }
 	  public void keyTyped( KeyEvent e){
 		  if (e.getKeyCode() == KeyEvent.VK_KP_RIGHT || e.getKeyCode() == KeyEvent.VK_RIGHT){ 
@@ -583,14 +575,10 @@ public class MesGUI_Panel extends JPanel {
 				   movePlayerDown();
 			 else if (e.getKeyCode() == KeyEvent.VK_KP_UP || e.getKeyCode() == KeyEvent.VK_UP) 
 				   movePlayerUp();
-			 else if (e.getKeyCode() == KeyEvent.VK_A){
+			 else if (e.getKeyCode() == KeyEvent.VK_A)
 				 attackMonster();
-				 System.out.println(USER.getButton().getRow()+" , "+USER.getButton().getCol()+" , "+M.getButton().getRow()+" , "+M.getButton().getCol());
-			 }
-			 else if (e.getKeyCode() == KeyEvent.VK_S){
+			 else if (e.getKeyCode() == KeyEvent.VK_S)
 				 specialAttack();
-				 System.out.println(USER.getButton().getRow()+" , "+USER.getButton().getCol()+" , "+M.getButton().getRow()+" , "+M.getButton().getCol());
-			 }
 	  }
   }
   public void reDisplay(){

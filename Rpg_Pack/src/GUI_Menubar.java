@@ -37,6 +37,7 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 		m2 = new JMenu("Player");
 		group = new ButtonGroup();
 		JRadioButtonMenuItem rbmi1= new JRadioButtonMenuItem("Fisticuffs");
+		rbmi1.addActionListener(this);
 		rbmi1.setSelected(true);
 		group.add(rbmi1);
 		m2.add(rbmi1);
@@ -73,37 +74,35 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 	}
 	public void addWeapon(String name){
 		JRadioButtonMenuItem rbmi = new JRadioButtonMenuItem(name);
+		rbmi.addActionListener(this);
 		group.add(rbmi);
 		m2.add(rbmi);
 	}
 	public void addSelectedWeapon(String name){
 		JRadioButtonMenuItem rbmi = new JRadioButtonMenuItem(name);
+		rbmi.addActionListener(this);
 		group.add(rbmi);
 		m2.add(rbmi);
 		rbmi.setSelected(true);
 	}
-	@SuppressWarnings("deprecation")
 	public void setCurrentWeapon(Object obj){
 		JRadioButtonMenuItem rb = (JRadioButtonMenuItem)obj;
-		String name = rb.getLabel();
 		ArrayList<Weapon>weps = MesGUI_Panel.USER.getWepsInInventory();
+		String name = rb.getText();
 		  for (Weapon wep:weps){
-			  if ((wep.getName().toLowerCase()).equals(name)){
+			  if (wep.getName().equals(name)){
 				  MesGUI_Panel.W = wep;
 				  return;
 			  }
 		  }
 	}
-    @SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) { 
-    	if ((((JMenuItem)e.getSource()).getLabel()).equals("Garendork Help"))
+    	if ((((JMenuItem)e.getSource()).getText()).equals("Garendork Help"))
     		displayHelpWindow();
-    	else if ((((JMenuItem)e.getSource()).getLabel()).equals("About"))
+    	else if ((((JMenuItem)e.getSource()).getText()).equals("About"))
     		displayAboutWindow();
-    	else if (e.getSource() instanceof JRadioButtonMenuItem){
+    	else if (e.getSource() instanceof JRadioButtonMenuItem)
     		setCurrentWeapon(e.getSource());
-    		((JRadioButtonMenuItem)e.getSource()).setSelected(true);
-    	}
 	}
 	
 }

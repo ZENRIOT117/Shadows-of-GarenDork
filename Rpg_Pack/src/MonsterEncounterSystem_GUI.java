@@ -1,5 +1,4 @@
 import javax.swing.*; 
-
 import java.awt.*; 
 
 public class MonsterEncounterSystem_GUI {
@@ -8,7 +7,7 @@ public class MonsterEncounterSystem_GUI {
 		 JFrame frame = new JFrame(); 
 		 frame.setDefaultCloseOperation( JFrame. EXIT_ON_CLOSE );
 		 @SuppressWarnings("unused") Splash_Screen splash = new Splash_Screen("src/img/FullWaveLogo.png",frame,5000);
-		 JFrame f = new JFrame("Shadows of Garendork"); 
+		 JFrame f = new JFrame("Shadows of GarenDork"); 
 		 f.setDefaultCloseOperation( JFrame. EXIT_ON_CLOSE );
 		 Dimension screensize= Toolkit.getDefaultToolkit().getScreenSize();
 		 double height = screensize.getHeight();
