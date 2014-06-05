@@ -153,25 +153,23 @@ public class MesGUI_Panel extends JPanel {
 		  type = type.toLowerCase();
 		  if (type.equals("assassin")){
 			  MesGUI_Panel.USER = new Assassin(name);
-			  grid[5][cols/2] = new Player_Button(new ImageIcon("src/img/Brute.png"));
+			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Brute.png"));
 		  }
 		  else if (type.equals("brute")){
 			  MesGUI_Panel.USER = new Brute(name);
-			  grid[5][cols/2] = new Player_Button(new ImageIcon("src/img/Brute.png"));
+			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Brute.png"));
 		  }
 		  else if (type.equals("mage")){
 			  MesGUI_Panel.USER = new Mage(name);
-			  grid[5][cols/2] = new Player_Button(new ImageIcon("src/img/Warrior.png"));
+			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Warrior.png"));
 		  }
 		  else{
 			  MesGUI_Panel.USER = new Warrior(name);
-			  grid[5][cols/2] = new Player_Button(new ImageIcon("src/img/Warrior.png"));
+			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Warrior.png"));
 		  
 		  }
 		  M = pool.getMonster(USER.getLevel());
 		  ArrayList<Weapon> weps = USER.getWepsInInventory();
-		  //(MonsterEncounterSystem_GUI.menu).addSelectedWeapon(weps.get(1).getName());
-		  //un-comment above line and comment next line if running using MonsterEncounterSystem_GUI
 		  (Main_Runner.menu).addSelectedWeapon(weps.get(1).getName());
 		  W = weps.get(1);
 		  grid[0][cols/2] = M.getButton();
@@ -274,10 +272,16 @@ public class MesGUI_Panel extends JPanel {
 		  int gold = getGold();
 		  Item reward = chest.getReward();
 		  if(reward instanceof Weapon)
-			  (MonsterEncounterSystem_GUI.menu).addWeapon(reward.getName());
+			  (Main_Runner.menu).addWeapon(reward.getName());
+		  else if(reward instanceof ArmorItem)
+			  (Main_Runner.menu).addArmor(reward.getName());
+		  else if(reward instanceof Potion && (((Potion)reward).getEffect().equals("HEAL") || ((Potion)reward).getEffect().equals("SWIFT")))
+			  (Main_Runner.menu).addHelpfulPotion(reward.getName());
+		  else if(reward instanceof Potion)
+			  (Main_Runner.menu).addPainfulPotion(reward.getName());
 		  USER.addToInventory(reward);
 		  USER.addGold(gold);
-		  grid[M.getButton().getRow()][M.getButton().getCol()] = new Tree_Button(new ImageIcon("src/img/Tree3.png"));
+		  grid[M.getButton().getRow()][M.getButton().getCol()] = new Tree_Button(new ImageIcon("img/Tree3.png"));
 		  M = null;
 		  spawnMonster();
 		  boolean b = USER.monsterKilled();
@@ -336,7 +340,7 @@ public class MesGUI_Panel extends JPanel {
 			  txtarea.append(arm.getStats()+", Description on tag: "+arm.getDescription()+"\n");
 		    }
 		  }
-		  txtarea.append("\n Enter /fight to fight a monster, or /help for commands");
+		  txtarea.append("\n Enter /advance to move forwards, or /help for commands");
 	  }
 	  public void usePotion(String str){
 		  String pname = str.substring(11);
@@ -344,7 +348,7 @@ public class MesGUI_Panel extends JPanel {
 		  for(Potion pot:pots){
 			  if ((pot.getName().toLowerCase()).equals(pname)){
 				  MES_Panel.USER.usePotion(pot);
-				  txtarea.setText("You used a: "+pot.getName()+" potion!\n Enter /fight to fight a monster, or /help for commands");
+				  txtarea.setText("You used a: "+pot.getName()+" potion!\n Enter /advance to move forwards, or /help for commands");
 				  return;
 			  }
 		  }
@@ -399,11 +403,11 @@ public class MesGUI_Panel extends JPanel {
 		  for(ArmorItem arm:arms){
 			  if ((arm.getName().toLowerCase()).equals(ename)){
 				  USER.useArmorItem(arm);
-				  txtarea.setText("You equipped a: "+arm.getName()+" Armor Item!\n Enter /fight to fight a monster, or /help for commands");
+				  txtarea.setText("You equipped a: "+arm.getName()+" Armor Item!\n Enter /advance to move forwards, or /help for commands");
 				  return;
 			  }
 		  }
-		  txtarea.setText("That Armor Item name is invalid, please try again\n\nEnter /fight to fight a monster, or /help for commands");
+		  txtarea.setText("That Armor Item name is invalid, please try again\n\nEnter /advance to move forwards, or /help for commands");
 	  }
 	  public void usePotionOn(){
 		  String pname = str1.substring(13);
@@ -411,11 +415,11 @@ public class MesGUI_Panel extends JPanel {
 		  for(Potion pot:pots){
 			  if ((pot.getName().toLowerCase()).equals(pname)){
 				  M.usePotionOn(pot);
-				  txtarea.setText("You used a: "+pot.getName()+" potion on "+M.getName()+"!\n Enter /fight to fight a monster, or /help for commands");
+				  txtarea.setText("You used a: "+pot.getName()+" potion on "+M.getName()+"!\n Enter /advance to move forwards, or /help for commands");
 				  return;
 			  }
 		  }
-		  txtarea.setText("That Potion name is invalid, please try again\nEnter /fight to fight a monster, or /help for commands");
+		  txtarea.setText("That Potion name is invalid, please try again\nEnter /advance to move forwards, or /help for commands");
 	  }
 	  public void dropItem(){
 		  String iname = str1.substring(9);

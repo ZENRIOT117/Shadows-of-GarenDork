@@ -12,7 +12,7 @@ public class MonsterPool {
 	private Monster mon10 = new BasicMob("Your Best Friend's Mum",2,3,1,0);
 	//Level Split (For organizational sanity)
 	private Monster mon11 = new BasicMob("The Knight Who Says Ni",3,3,1,0);
-	private Monster mon12 = new BasicMob("Angery Zombie",3,3,1,0);
+	private Monster mon12 = new BasicMob("Angry Zombie",3,3,1,0);
 	private Monster mon13 = new BasicMob("Cloaker With a Taser",3,3,1,0);
 	private Monster mon14 = new BasicMob("Hissing Creeper",3,3,1,0);
 	private Monster mon15 = new BasicMob("Really Slow Freight Train",3,3,1,0);

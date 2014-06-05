@@ -26,7 +26,7 @@ public class Inventory {
 	public int getPackWeight(){
 		//returns the weight of a players inventory for player speed calculation
 		if(invent.size()>1)
-			return (invent.size()/3);
+			return (invent.size()/2);
 		else
 			return invent.size();
 	}

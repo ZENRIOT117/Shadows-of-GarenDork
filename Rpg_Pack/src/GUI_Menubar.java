@@ -11,8 +11,11 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 	private Font segoe = new Font("Segoe UI", Font.PLAIN, 18);
 	private JFrame frame = new JFrame();
 	private JTextArea txtarea = new JTextArea();
-	private ButtonGroup group;
-	private JMenu m2;
+	private JMenu m4 = new JMenu("Current Weapon");
+	private ButtonGroup wepgroup = new ButtonGroup();
+	private JMenu m5 = new JMenu("Armor");
+	private JMenu m7 = new JMenu("Helpful");
+	private JMenu m8 = new JMenu("Painful");
 
 	public GUI_Menubar(){
 		frame.setDefaultCloseOperation( JFrame. HIDE_ON_CLOSE );
@@ -34,13 +37,13 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 		JMenuItem mi2 = new JMenuItem("Load");
 		mi2.addActionListener(this);
 		m.add(mi2);
-		m2 = new JMenu("Player");
-		group = new ButtonGroup();
+		JMenu m2 = new JMenu("Inventory");
 		JRadioButtonMenuItem rbmi1= new JRadioButtonMenuItem("Fisticuffs");
 		rbmi1.addActionListener(this);
 		rbmi1.setSelected(true);
-		group.add(rbmi1);
-		m2.add(rbmi1);
+		wepgroup.add(rbmi1);
+		m4.add(rbmi1);
+		m4.addSeparator();
 		JMenu m3 = new JMenu("Help");
 		JMenuItem mi3 = new JMenuItem("Garendork Help");
 		mi3.addActionListener(this);
@@ -48,10 +51,17 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 		m3.addSeparator();
 		JMenuItem mi4 = new JMenuItem("About");
 		mi4.addActionListener(this);
+		JMenu m6 = new JMenu("Potions");
+		m6.add(m7);
+		m6.add(m8);
 		m3.add(mi4);
+		m2.add(m4);
+		m2.add(m5);
+		m2.add(m6);
 		add(m);
 		add(m2);
 		add(m3);
+		addHelpfulPotion("pot test");
 	}
 	public void displayHelpWindow(){
 		frame.setTitle("Help");
@@ -72,18 +82,38 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 				+ "  Methacton High School and Mr. Sawyer");
 		frame.setVisible(true);
 	}
+	public void addArmor(String name){
+		JMenuItem rbmi = new JMenuItem(name);
+		rbmi.addActionListener(this);
+		m5.add(rbmi);
+		m5.addSeparator();
+	}
 	public void addWeapon(String name){
 		JRadioButtonMenuItem rbmi = new JRadioButtonMenuItem(name);
 		rbmi.addActionListener(this);
-		group.add(rbmi);
-		m2.add(rbmi);
+		wepgroup.add(rbmi);
+		m4.add(rbmi);
+		m4.addSeparator();
 	}
 	public void addSelectedWeapon(String name){
 		JRadioButtonMenuItem rbmi = new JRadioButtonMenuItem(name);
 		rbmi.addActionListener(this);
-		group.add(rbmi);
-		m2.add(rbmi);
+		wepgroup.add(rbmi);
+		m4.add(rbmi);
+		m4.addSeparator();
 		rbmi.setSelected(true);
+	}
+	public void addHelpfulPotion(String name){
+		JMenuItem rbmi = new JMenuItem(name);
+		rbmi.addActionListener(this);
+		m7.add(rbmi);
+		m7.addSeparator();
+	}
+	public void addPainfulPotion(String name){
+		JMenuItem rbmi = new JMenuItem(name);
+		rbmi.addActionListener(this);
+		m8.add(rbmi);
+		m8.addSeparator();
 	}
 	public void setCurrentWeapon(Object obj){
 		JRadioButtonMenuItem rb = (JRadioButtonMenuItem)obj;

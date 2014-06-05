@@ -7,60 +7,58 @@ public class Main_Runner {
 	
 	public static GUI_Menubar menu;
 	private static Font segoe = new Font("Segoe UI", Font.PLAIN, 18);
-	
+	private static JFrame fr;
 	public static void main(String[] args) {
 		 JFrame frame = new JFrame(); 
+		 Toolkit toolkit= Toolkit.getDefaultToolkit();
+		 frame.setIconImage(toolkit.getImage("img/Tree3.png"));
 		 frame.setDefaultCloseOperation( JFrame. HIDE_ON_CLOSE );
-		 @SuppressWarnings("unused") Splash_Screen splash = new Splash_Screen("src/img/FullWaveLogo.png",frame,5000);
-		 JFrame f = new JFrame("Shadows of GarenDork"); 
-		 f.setDefaultCloseOperation( JFrame. HIDE_ON_CLOSE );
-		 Dimension screensize= Toolkit.getDefaultToolkit().getScreenSize();
+		 @SuppressWarnings("unused") Splash_Screen splash = new Splash_Screen("img/FullWaveLogo.png",frame,5000);
+		 fr = new JFrame("Shadows of GarenDork"); 
+		 fr.setDefaultCloseOperation( JFrame. HIDE_ON_CLOSE );
+		 Dimension screensize= toolkit.getScreenSize();
 		 double height = screensize.getHeight();
 		 double width = screensize.getWidth();
 		 height = height-40;
-		 f.setSize((int)width,(int)height);
-		 f.setResizable(false);
-		 f.setLayout(new BorderLayout());
-		 Container pane = f.getContentPane(); 
+		 fr.setSize((int)width,(int)height);
+		 fr.setResizable(false);
+		 fr.setLayout(new BorderLayout());
+		 Container pane = fr.getContentPane(); 
 		 pane.setLayout( new BorderLayout() );
 		 JPanel p1 = new JPanel();
-		 p1.setPreferredSize(new Dimension((int)width,(int)(height/2)));
-		 p1.setLayout(new BorderLayout());
+		 p1.setPreferredSize(new Dimension((int)width,(int)(height/8)));
+		 p1.setLayout(new GridLayout(1,2));
 		 JButton btn1 = new JButton("Graphical Version");
 		 btn1.setPreferredSize(new Dimension((int)(width/8),(int)(width/8)));
 		 btn1.addMouseListener(new Butts());
 		 btn1.setBackground(Color.WHITE);
 		 btn1.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-		 btn1.setFont(segoe);
-		 ImageIcon icon = new ImageIcon("src/img/GUI_Screenshot.png");
-		 Image ic = icon.getImage();
-		 ic = ic.getScaledInstance((int)(width*(7.0/8.0)),(int)(height/2),Image.SCALE_DEFAULT);
-		 icon.setImage(ic);
-		 JLabel lbl1 = new JLabel(icon);
-		 p1.add(btn1 ,BorderLayout.EAST);
-		 p1.add(lbl1, BorderLayout.CENTER);
+		 btn1.setFont(segoe);;
+		 p1.add(btn1);
 		 //Break
-		 JPanel p2 = new JPanel();
-		 p2.setPreferredSize(new Dimension((int)width,(int)(height/2)));
-		 p2.setLayout(new BorderLayout());
+		 JPanel page= new JPanel();
+		 page.setLayout(new BorderLayout());
+		 JTextArea txtarea = new JTextArea();
+		 txtarea.setEditable(false);
+		 txtarea.setFont(segoe);
+		 txtarea.setText("Welcome to Shadows of GarenDork v0.1 Alpha!\n"
+			 		+ "\nLatest News:\n"
+			 		+ "\n5/28/14 - Source code now available on GitHub!\n"
+			 		+ "\n\nPlease select either graphical or text version of the game below");
+		 page.add(txtarea, BorderLayout.CENTER);
+		 //txtarea.setPreferredSize(page.getSize());
 		 JButton btn2 = new JButton("Text Version");
 		 btn2.setPreferredSize(new Dimension((int)(width/8),(int)(width/8)));
 		 btn2.addMouseListener(new Butts());
 		 btn2.setBackground(Color.WHITE);
 		 btn2.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		 btn2.setFont(segoe);
-		 ImageIcon icon2 = new ImageIcon("src/img/Text_Screenshot.png");
-		 Image ic2 = icon2.getImage();
-		 ic2 = ic2.getScaledInstance((int)(width*(7.0/8.0)),(int)(height/2),Image.SCALE_DEFAULT);
-		 icon2.setImage(ic2);
-		 JLabel lbl2 = new JLabel(icon2);
-		 p2.add(btn2 ,BorderLayout.EAST);
-		 p2.add(lbl2, BorderLayout.CENTER);
-		 pane.add(p1,BorderLayout.NORTH);
-		 pane.add(p2,BorderLayout.SOUTH);
-		 f.setVisible(true);
+		 p1.add(btn2);
+		 pane.add(page,BorderLayout.CENTER);
+		 pane.add(p1,BorderLayout.SOUTH);
+		 fr.setVisible(true);
 		 btn1.grabFocus();
-		 f.requestFocus();
+		 fr.requestFocus();
 	}
 	private static class Butts extends MouseAdapter{
 		@SuppressWarnings("deprecation")
@@ -85,6 +83,7 @@ public class Main_Runner {
 					 f.pack(); 
 					 f.setVisible( true );
 					 p4.askPlayerName();
+					 fr.dispose();
 			}
 			else{
 				JFrame frame = new JFrame(); 
@@ -114,6 +113,7 @@ public class Main_Runner {
 				 pane.add( p3, BorderLayout.WEST );
 				 f.pack(); 
 				 f.setVisible( true );
+				 fr.dispose();
 			}
 		}
 	}

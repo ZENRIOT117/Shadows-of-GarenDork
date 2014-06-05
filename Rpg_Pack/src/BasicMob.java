@@ -17,7 +17,7 @@ public class BasicMob implements Monster {
 		health = h;
 		damage = d;
 		speed = s;
-		butt = new Monster_Button(new ImageIcon("src/img/GrayMonster.png"),name);
+		butt = new Monster_Button(new ImageIcon("img/GrayMonster.png"),name);
 	}
 	public BasicMob(){
 		//undefined is the best defined

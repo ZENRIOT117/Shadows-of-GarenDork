@@ -415,6 +415,10 @@ public class Player {
 		goldPieces -= g;
 	}
 	//removes gold from the players wallet
+	public Inventory getInventoryObject(){
+		return inventory;
+	}
+	//returns the inventory object of a players inventory for pack weight usage mostly
 	public void setButton( Player_Button p){
 		pb = p;
 	}

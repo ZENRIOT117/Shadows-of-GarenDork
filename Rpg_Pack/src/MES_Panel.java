@@ -59,7 +59,7 @@ public class MES_Panel extends JPanel {
 	add(p);
   }
   public void help(){
-    txtarea.setText("/fight -(Deprecated) spawns a monster for you to fight\n"
+    txtarea.setText("/fight -(Deprecated, for debugging use only) spawns a monster for you to fight\n"
     		+ "/attack - attacks the monster you are fighting with your current weapon\n"
     		+ "/run - attempts to escape the monster\n"
     		+ "/currentWeapon=(weapon name) - sets your current weapon, weapon name should be entered as it appears in your inventory\n"
@@ -103,7 +103,7 @@ public class MES_Panel extends JPanel {
 	  else
 		  MES_Panel.USER = new Warrior(name);
 	  playerStats();
-	  txtarea.append("\nEnter /fight to play or /help for commmands"
+	  txtarea.append("\nEnter /advance to play or /help for commmands"
 	  		+ "\nEnjoy the Game!");
 	  updatePanels();
   }
@@ -131,13 +131,13 @@ public class MES_Panel extends JPanel {
 		  Item reward = (Item)t.getReward();
 		  USER.addToInventory(reward);
 		  txtarea.setText("Congratulations, you found a secret treasure room! You got a(n):\n"
-			  		+ "\n"+reward.getType()+": "+reward.getStats()+"\nDescription on tag: "+reward.getDescription()+"\n\nEnter /advance to move forward, or /help for commands");
+			  		+ "\n"+reward.getType()+": "+reward.getStats()+"\nDescription on tag: "+reward.getDescription()+"\n\nEnter /advance to move forwards, or /help for commands");
 	  }
 	  else{
 		  Potion x= t.getAntiReward();
 		  USER.usePotion(x);
 		  txtarea.setText("Oh no, an evil chest goblin chucked a splash potion at you! He threw a(n):\n"
-			  		+ "\n"+x.getType()+": "+x.getStats()+"\nDescription of damage: "+x.getDescription()+"\n\nEnter /advance to move forward, or /help for commands");
+			  		+ "\n"+x.getType()+": "+x.getStats()+"\nDescription of damage: "+x.getDescription()+"\n\nEnter /advance to move forwards, or /help for commands");
 	  }
 	  updatePanels();
   }
@@ -152,7 +152,7 @@ public class MES_Panel extends JPanel {
 		  USER.removeMerchVisit();
 	  }
 	  else
-		  txtarea.setText("You cannot seem to find the merchant... oh well.");
+		  txtarea.setText("You cannot seem to find the merchant... oh well.\n\nEnter /advance to move forwards, or /help for commands");
 	  updatePanels();	  
   }
   public void purchaseItem(String name){
@@ -175,7 +175,8 @@ public class MES_Panel extends JPanel {
   public void fightMonster(){
 	  if (m == null){
 	  m = pool.getMonster(MES_Panel.USER.getLevel());
-	  txtarea.setText("You have encountered a monster!"+"\n"+m.getName()+": "+m.getStats()+"\n          VS:\n"+MES_Panel.USER.getStats()+"\n\nTo attack "
+	  Inventory invent= USER.getInventoryObject();
+	  txtarea.setText("You have encountered a monster!"+"\n"+m.getName()+": "+m.getStats()+"\n          VS:\n"+MES_Panel.USER.getStats()+"\n\nYour pack weight is: "+invent.getPackWeight()+"\n\nTo attack "
 		  		+ "say /attack\nTo use a potion, say /usePotion=(potion name)\n To use a potion on the monster, say /usePotionOn=(potion name)"
 		  		+ "\nTo attempt to run, say /run\nTo drop items from your pack to lower pack weight, say /dropItem=(Item name)\nOr /help for commands\n");
 	  }
@@ -185,28 +186,29 @@ public class MES_Panel extends JPanel {
   }
   public void updateBattleStats(){
 	  if (m != null && m.isDead() == false){
-	  txtarea.setText("You are fighting a: "+"\n"+m.getName()+": "+m.getStats()+"\n\tVS:\n"+MES_Panel.USER.getStats()+"\n\nTo attack "
+		  Inventory invent= USER.getInventoryObject();
+	  txtarea.setText("You are fighting a: "+"\n"+m.getName()+": "+m.getStats()+"\n\tVS:\n"+MES_Panel.USER.getStats()+"\n\nYour pack weight is: "+invent.getPackWeight()+"\n\nTo attack "
 		  		+ "say /attack\nTo use a potion, say /usePotion=(potion name)\n To use a potion on the monster, say /usePotionOn=(potion name)"
 		  		+ "\nTo attempt to run, say /run\nTo drop items from your pack to lower pack weight, say /dropItem=(Item name)\nOr /help for commands\n");
 	  }
 	  else if (m == null && bool == false)
-		  txtarea.setText("Ummm, stop attacking the air, what did it do to you? Enter /fight to fight a monster, or /help for commands");
+		  txtarea.setText("Ummm, stop attacking the air, what did it do to you? Enter /advance to move forwards, or /help for commands");
 	  else if( m != null && m.isDead())
 			 awardTreasure();
 		 else{
 			 if (bool){
 				 if (MES_Panel.USER.getLevel() < 9){
-			       txtarea.setText("Haha! You mutilate the bodies and get an extra kill! (usable only once)\nEnter /fight to fight a monster, or /help for commands");			 
+			       txtarea.setText("Haha! You mutilate the bodies and get an extra kill! (usable only once)\nEnter /advance to move forwards, or /help for commands");			 
 			        boolean b = MES_Panel.USER.monsterKilled();
 			        if(b)
 			        	txtarea.append("\n\nHooray! You Gained a Level!");
 				 }
 				 else
-					 txtarea.setText("Sorry, you can't mutilate the bodies to get to level 10!, you have to beat the last boss first!\n Enter /fight to fight a monster, or /help for commands");
+					 txtarea.setText("Sorry, you can't mutilate the bodies to get to level 10!, you have to beat the last boss first!\n Enter /advance to move forwards, or /help for commands");
 			 bool = false;
 			 }
 			 else
-				 txtarea.setText("You have already mutilated the bodies! There's nothing left to attack\n Enter /fight to fight a monster, or /help for commands");
+				 txtarea.setText("You have already mutilated the bodies! There's nothing left to attack\n Enter /advance to move forwards, or /help for commands");
 		 }
 	  updatePanels(); 
   }
@@ -216,21 +218,21 @@ public class MES_Panel extends JPanel {
 		  updateBattleStats();
 	 }
 	 else if (m == null && bool == false)
-	  txtarea.setText("Ummm, stop attacking the air, what did it ever do to you?\n\nEnter /fight to fight a monster, or /help for commands");
+	  txtarea.setText("Ummm, stop attacking the air, what did it ever do to you?\n\nEnter /advance to move forwards, or /help for commands");
 	 else if( m != null && m.isDead())
 		 awardTreasure();
 	 else{
 		 if(bool){
 			 if (MES_Panel.USER.getLevel() < 9){
-		       txtarea.setText("Haha! You mutilate the bodies and get an extra kill (usable only once)\n\nEnter /fight to fight a monster, or /help for commands");			 
+		       txtarea.setText("Haha! You mutilate the bodies and get an extra kill (usable only once)\n\nEnter /advance to move forwards, or /help for commands");			 
 		        MES_Panel.USER.monsterKilled();
 			 }
 			 else
-				 txtarea.setText("Sorry, you can't mutilate the bodies to get to level 10!, you have to beat the last boss first!\n\nEnter /fight to fight a monster, or /help for commands");
+				 txtarea.setText("Sorry, you can't mutilate the bodies to get to level 10!, you have to beat the last boss first!\n\nEnter /advance to move forwards, or /help for commands");
 			 bool = false;
 		 }
 		 else
-			 txtarea.setText("You have already mutilated the bodies! There's nothing left to attack\n\nEnter /fight to fight a monster, or /help for commands");
+			 txtarea.setText("You have already mutilated the bodies! There's nothing left to attack\n\nEnter /advance to move forwards, or /help for commands");
 	 }
 	 updatePanels();
   } 
@@ -240,7 +242,7 @@ public class MES_Panel extends JPanel {
 	  MES_Panel.USER.addToInventory(reward);
 	  MES_Panel.USER.addGold(gold);
 	  txtarea.setText("Congratulations, you defeated a monster, and captured its treasure! You got a(n):\n"
-	  		+ "\n"+reward.getType()+": "+reward.getStats()+"\nDescription on tag: "+reward.getDescription()+"\n\nAnd you got "+new Integer(gold).toString()+" gold pieces!"+"\n\nEnter /fight to fight a monster, or /help for commands");
+	  		+ "\n"+reward.getType()+": "+reward.getStats()+"\nDescription on tag: "+reward.getDescription()+"\n\nAnd you got "+new Integer(gold).toString()+" gold pieces!"+"\n\nEnter /advance to move forwards, or /help for commands");
 	  m = null;
 	  boolean b = MES_Panel.USER.monsterKilled();
 	  if (b)
@@ -253,12 +255,12 @@ public class MES_Panel extends JPanel {
 	  for (Weapon wep:weps){
 		  if ((wep.getName().toLowerCase()).equals(str)){
 			  w = wep;
-			  txtarea.setText("Your current weapon is now:\n"+wep.getName()+"\n\nEnter /fight to fight a monster, or /help for commands");
+			  txtarea.setText("Your current weapon is now:\n"+wep.getName()+"\n\nEnter /advance to move forwards, or /help for commands");
 			  updatePanels();
 			  return;
 		  }
 	  }
-	  txtarea.setText("That Weapon name is invalid, please try again\n\nEnter /fight to fight a monster, or /help for commands");
+	  txtarea.setText("That Weapon name is invalid, please try again\n\nEnter /advance to move forwards, or /help for commands");
 	  updatePanels();
   }
   public void displayInventory(){
@@ -281,7 +283,7 @@ public class MES_Panel extends JPanel {
 		  txtarea.append(arm.getStats()+", Description on tag: "+arm.getDescription()+"\n");
 	    }
 	  }
-	  txtarea.append("\n Enter /fight to fight a monster, or /help for commands");
+	  txtarea.append("\n Enter /advance to move forwards, or /help for commands");
 	  updatePanels();
   }
   public void usePotion(String str){
@@ -290,12 +292,12 @@ public class MES_Panel extends JPanel {
 	  for(Potion pot:pots){
 		  if ((pot.getName().toLowerCase()).equals(pname)){
 			  MES_Panel.USER.usePotion(pot);
-			  txtarea.setText("You used a: "+pot.getName()+" potion!\n Enter /fight to fight a monster, or /help for commands");
+			  txtarea.setText("You used a: "+pot.getName()+" potion!\n Enter /advance to move forwards, or /help for commands");
 			  updatePanels();
 			  return;
 		  }
 	  }
-	  txtarea.setText("That Potion name is invalid, please try again\nEnter /fight to fight a monster, or /help for commands");
+	  txtarea.setText("That Potion name is invalid, please try again\nEnter /advance to move forwards, or /help for commands");
 	  updatePanels();
   }
   public void throwDagger(){
@@ -341,11 +343,11 @@ public class MES_Panel extends JPanel {
   }
   public void runAway(){
 	  if (MES_Panel.USER.canRun(m)){
-		  txtarea.setText("Whew, got away in one piece\nEnter /fight to fight a monster, or /help for commands");
+		  txtarea.setText("Whew, got away in one piece\nEnter /advance to move forwards, or /help for commands");
 		  m = null;
 	  }
 	  else
-		  txtarea.setText("You can't outrun that monster!, try emptying things from your inventory to lose weight!\nEnter dropItem=(Item name) to lower your pack weight\nEnter /fight to fight a monster, or /help for commands");
+		  txtarea.setText("You can't outrun that monster!, try emptying things from your inventory to lose weight!\nEnter dropItem=(Item name) to lower your pack weight\nEnter /advance to move forwards, or /help for commands");
 	  updatePanels();
   }
   public void equipArmor(){
@@ -354,12 +356,12 @@ public class MES_Panel extends JPanel {
 	  for(ArmorItem arm:arms){
 		  if ((arm.getName().toLowerCase()).equals(ename)){
 			  MES_Panel.USER.useArmorItem(arm);
-			  txtarea.setText("You equipped a: "+arm.getName()+" Armor Item!\n Enter /fight to fight a monster, or /help for commands");
+			  txtarea.setText("You equipped a: "+arm.getName()+" Armor Item!\n Enter /advance to move forwards, or /help for commands");
 			  updatePanels();
 			  return;
 		  }
 	  }
-	  txtarea.setText("That Armor Item name is invalid, please try again\n\nEnter /fight to fight a monster, or /help for commands");
+	  txtarea.setText("That Armor Item name is invalid, please try again\n\nEnter /advance to move forwards, or /help for commands");
 	  updatePanels();
   }
   public void usePotionOn(){
@@ -368,25 +370,28 @@ public class MES_Panel extends JPanel {
 	  for(Potion pot:pots){
 		  if ((pot.getName().toLowerCase()).equals(pname)){
 			  m.usePotionOn(pot);
-			  txtarea.setText("You used a: "+pot.getName()+" potion on "+m.getName()+"!\n Enter /fight to fight a monster, or /help for commands");
+			  txtarea.setText("You used a: "+pot.getName()+" potion on "+m.getName()+"!\n Enter /advance to move forwards, or /help for commands");
 			  updatePanels();
 			  return;
 		  }
 	  }
-	  txtarea.setText("That Potion name is invalid, please try again\nEnter /fight to fight a monster, or /help for commands");
+	  txtarea.setText("That Potion name is invalid, please try again\nEnter /advance to move forwards, or /help for commands");
 	  updatePanels(); 
   }
   public void dropItem(){
-	  String iname = str1.substring(9);
-	  if(iname.equals("Fisticuffs")){
+	  String iname = str1.substring(10);
+	  if(iname.equals("fisticuffs")){
 		  txtarea.setText("You can't lop off your hands! Keep your Fisticuffs!");
 		  return;
 	  }
 	  else{ 
 		  ArrayList<Item>items = (MES_Panel.USER).getInventory();
 		  for(Item i:items){
-			  if (i.getName().equals(iname))
+			  if (i.getName().toLowerCase().equals(iname)){
+				  if(w.getName().toLowerCase().equals(iname))
+					  w= (Weapon)items.get(0);
 				  (MES_Panel.USER).removeFromInventory(i); 
+			  }
 		  }
 	  }	 
 	updatePanels();	 
@@ -441,7 +446,7 @@ public class MES_Panel extends JPanel {
 		  usePotionOn();
 	  else if (str1.length() > 5 && str1.substring(0,5).equals("/buy="))
 		  purchaseItem(str1.substring(5,str1.length()));
-	  else if (str1.length() > 9 && str1.substring(0,9).equals("/dropitem="))
+	  else if (str1.length() > 9 && str1.substring(0,10).equals("/dropitem="))
 		  dropItem();
 	  else
 		  txtarea.setText("Sorry, invalid command, try /help for the commands list");
