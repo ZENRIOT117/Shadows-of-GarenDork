@@ -75,4 +75,11 @@ public class MonsterPool {
 		int num = (int)(temp.length*Math.random());
 		return temp[num];
 	}
+	public Monster returnMonster(String name){
+		for(int i=0; i<MONSTERS.length;i++)
+			if(name.toLowerCase().equals(MONSTERS[i].getName().toLowerCase()))
+				return MONSTERS[i];
+		return null; 
+		
+	}
 }

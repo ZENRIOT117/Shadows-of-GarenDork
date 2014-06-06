@@ -10,14 +10,16 @@ public class Player_Button extends JButton {
 	//font for entire game
 	private int row = -1;
 	private int col = -1;
+	private String filepath;
 	
 	public Player_Button(){
 		
 	}
-	public Player_Button(ImageIcon icon){
+	public Player_Button(ImageIcon icon, String fpath,String name){
 		super(icon);
+		filepath = fpath;
 		setFont(segoe);
-		setToolTipText((MesGUI_Panel.USER).getName());
+		setToolTipText(name);
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 	}
@@ -36,5 +38,8 @@ public class Player_Button extends JButton {
 	}
 	public int getCol(){
 		return col;
+	}
+	public String getPath(){
+		return filepath;
 	}
 }

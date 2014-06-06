@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
 public class GUI_Menubar extends JMenuBar implements ActionListener{
@@ -61,7 +60,6 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 		add(m);
 		add(m2);
 		add(m3);
-		addHelpfulPotion("pot test");
 	}
 	public void displayHelpWindow(){
 		frame.setTitle("Help");
@@ -109,6 +107,42 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 		m7.add(rbmi);
 		m7.addSeparator();
 	}
+	public void usePot(String name){
+		ArrayList<Potion> pots= MesGUI_Panel.USER.getPotsInInventory();
+		boolean bool= false;
+		if(pots.size()>0){
+			for(int i=0; i<pots.size();i++){
+				if(name.toLowerCase().equals(pots.get(i).getName().toLowerCase())){
+					if(((pots.get(i)).getEffect().equals("HEAL") || (pots.get(i)).getEffect().equals("SWIFT"))){
+						MesGUI_Panel.USER.usePotion(pots.get(i));
+						for(int c=0; c< m7.getItemCount();c++){
+							if(m7.getItem(c) instanceof JMenuItem){
+								if(m7.getItem(c).getText().toLowerCase().equals(name)){
+									m7.remove(c);
+									bool=true;
+									break;
+								}
+							}	
+						}
+					}		
+					else{
+						MesGUI_Panel.M.usePotionOn(pots.get(i));
+						for(int c=0; c< m8.getItemCount();c++){
+							if(m8.getItem(c) instanceof JMenuItem){
+								if(m8.getItem(c).getText().toLowerCase().equals(name)){
+									m8.remove(c);
+									bool=true;
+									break;
+								}
+							}	
+						}
+					}
+				}
+				if(bool)
+					break;
+			}
+		}
+	}
 	public void addPainfulPotion(String name){
 		JMenuItem rbmi = new JMenuItem(name);
 		rbmi.addActionListener(this);
@@ -126,11 +160,31 @@ public class GUI_Menubar extends JMenuBar implements ActionListener{
 			  }
 		  }
 	}
+	public void saveCurrentGame(){
+		Main_Runner.p4.saveGame();
+	}
+	public void loadCurrentGame(){
+		Main_Runner.p4.loadGame();
+	}
+	public void clearMenus(){
+		m4.removeAll();
+		m5.removeAll();
+		m7.removeAll();	
+		m8.removeAll();
+	}
 	public void actionPerformed(ActionEvent e) { 
     	if ((((JMenuItem)e.getSource()).getText()).equals("Garendork Help"))
     		displayHelpWindow();
     	else if ((((JMenuItem)e.getSource()).getText()).equals("About"))
     		displayAboutWindow();
+    	else if ((((JMenuItem)e.getSource()).getText()).equals("Save"))
+    		saveCurrentGame();
+    	else if ((((JMenuItem)e.getSource()).getText()).equals("Load"))
+    		loadCurrentGame();
+    	else if(e.getSource() instanceof JMenuItem){
+    		usePot(((JMenuItem)e.getSource()).getText().toLowerCase());
+    	}
+    		
     	else if (e.getSource() instanceof JRadioButtonMenuItem)
     		setCurrentWeapon(e.getSource());
 	}

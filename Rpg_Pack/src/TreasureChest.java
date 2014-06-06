@@ -39,5 +39,25 @@ public class TreasureChest {
 			its.add(ITEMS[i]);
 		return its;
 	}
-
+	public Item returnItem(String name){
+		ArrayList<Item> defItems= new ArrayList<Item>();
+		Weapon fists= new Weapon("Fisticuffs",1,"Ye bare knuckles.", 0);
+		Weapon sw= new Sword("Big Bertha",3,3,"A great sword for a great(ish) warrior.", 2);
+		Weapon st= new Staff("Wacky Stick",2,"It seems useless, but it works, I promise.", 2);
+		Weapon ham= new Hammer("Smashy Smashy",2,3,"About as subtle as ...well... a sledgehammer.", 2);
+		Weapon dag= new Dagger("Lil Stabber",3,1.2,"High speed, low drag.", 2);
+		defItems.add(fists);
+		defItems.add(sw);
+		defItems.add(st);
+		defItems.add(dag);
+		defItems.add(ham);
+		for(int i=0; i<ITEMS.length;i++)
+			if((name.toLowerCase()).equals(((ITEMS[i].getName()).toLowerCase())))
+				return ITEMS[i];
+		for(int i=0; i<defItems.size(); i++){
+			if((name.toLowerCase()).equals(((defItems.get(i).getName()).toLowerCase())))
+				return defItems.get(i);
+		}
+		return null; 
+	}
 }

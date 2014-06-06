@@ -10,4 +10,9 @@ public interface Monster {
 	public boolean isDead();//returns whether monster is dead or not
 	public void usePotionOn(Potion x);//applies a potion to the monster
 	public Monster_Button getButton(); // returns monster button associated
+	public void setButton(Monster_Button mb); // returns monster button associated
+	public void setHealth(int heal);
+	public void setDamage(int dam);
+	public void setLevel(int lev);
+	public void setSpeed(int spee);
 }

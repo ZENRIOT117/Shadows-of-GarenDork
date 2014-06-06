@@ -10,7 +10,7 @@ public class BossMob implements Monster {
 	private boolean isAlive= true;
 	private String potionEffect = "NONE";
 	private final String[] EFFECT_TYPES={"PARALYSIS","POISON"};
-	private Monster_Button butt = new Monster_Button(new ImageIcon("src/GrayMonster.png"));
+	private Monster_Button butt = new Monster_Button(new ImageIcon("img/GrayMonster.png"),"img/GrayMonster", name);
 	
 	public BossMob(String n, int l, int h, int d, int s,String e){
 		name = n;
@@ -88,6 +88,18 @@ public class BossMob implements Monster {
 			speed=speed-sp;
 		else
 			speed=1;
+	}
+	public void setLevel(int lev){
+		level=lev;
+	}
+	public void setHealth(int heal){
+		health=heal;
+	}
+	public void setDamage(int dam){
+		damage=dam;
+	}
+	public void setSpeed(int spee){
+		speed=spee;
 	}
 	public String getStats(){
 		String stats = "Level: ";

@@ -18,7 +18,8 @@ public class Player {
 	private int currentMonstersKilled = 0;
 	private int goldPieces = 0;
 	private int merchvisits=2;
-	private Player_Button pb;
+	private Player_Button pb = null;
+	private Weapon currwep;
 	
 	public Player(){
 		//yay for undefined everything
@@ -72,6 +73,15 @@ public class Player {
 			merchvisits--;
 	}
 	//removes a merchant visit
+	public void setMerchVisits(int merch){
+		merchvisits=merch;
+	}
+	public void setMonstersKilled(int mons){
+		monstersKilled=mons;
+	}
+	public void setCurrentMonstersKilled(int mos){
+		currentMonstersKilled=mos;
+	}
 	public int getMonstersKilled(){
 		return monstersKilled;
 	}
@@ -343,6 +353,17 @@ public class Player {
 		currentMonsterEffect = "NONE";
 	}
 	//removes current effect applied to player
+	public String getPotionEffect(){
+		return currentMonsterEffect;
+	}
+	//returns current effect applied by monster to player
+	public void applyPotionEffect(String s){
+		currentMonsterEffect = s;
+	}
+	//changes the current effect applied to player
+	public void removePotionEffect(){
+		currentMonsterEffect = "NONE";
+	}
 	public String getStats(){
 		String stats = "Name: "+name;
 		String l = Integer.toString(level);
@@ -415,14 +436,40 @@ public class Player {
 		goldPieces -= g;
 	}
 	//removes gold from the players wallet
+	public void setGold(int gol){
+		goldPieces=gol;
+	}
 	public Inventory getInventoryObject(){
 		return inventory;
 	}
-	//returns the inventory object of a players inventory for pack weight usage mostly
+	//returns the inventory object of a players inventory for pack weight usage mostly, as if there weren't enough get methods already
+	public void setInvent(Inventory inv){
+		inventory=inv;
+	}
 	public void setButton( Player_Button p){
 		pb = p;
 	}
 	public Player_Button getButton(){
 		return pb;
+	}
+	public Weapon getCurrentPanelWeapon(){
+		if (pb == null){
+			return MES_Panel.w;
+		}
+		else
+			return MesGUI_Panel.W;
+	}
+	public void setCurrWeapon(Weapon w){
+		currwep = w;
+	}
+	public Weapon getCurrWeapon(){
+		return currwep;
+	}
+	public void setCurrentPanelWeapon(Weapon w){
+		if (pb == null){
+			MES_Panel.w = w;
+		}
+		else
+			MesGUI_Panel.W = w;
 	}
 }

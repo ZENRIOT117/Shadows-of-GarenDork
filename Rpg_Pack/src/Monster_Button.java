@@ -10,20 +10,15 @@ public class Monster_Button extends JButton {
 	private Font segoe = new Font("Segoe UI", Font.PLAIN, 18);
 	private int row = -1;
 	private int col = -1;
+	private String filepath;
 	
 	public Monster_Button(){
 		
 	}
 	
-	public Monster_Button(ImageIcon icon){
+	public Monster_Button(ImageIcon icon,String fpath, String name){
 		super(icon);
-		setFont(segoe);
-		setToolTipText((MesGUI_Panel.M).getName());
-		setBackground(Color.BLACK);
-		setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-	}
-	public Monster_Button(ImageIcon icon, String name){
-		super(icon);
+		filepath = fpath;
 		setFont(segoe);
 		setToolTipText(name);
 		setBackground(Color.BLACK);
@@ -44,5 +39,8 @@ public class Monster_Button extends JButton {
 	}
 	public int getCol(){
 		return col;
+	}
+	public String getPath(){
+		return filepath;
 	}
 }

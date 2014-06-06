@@ -36,3 +36,5 @@ Rpg_Pack v0.1 ALPHA Change Log
 (5/28/14)/(ZEN) - Finished MonsterPool
 (5/29/14)/(TF) - fixed weapon selection in GUI_menubar
 (5/29/14)/(TF) - fixed variable names to clear all errors in MesGUI_Panel
+(6/5/14)/(ZEN) - added SaveLoad class for saving and loading games
+(6/5/14)/(ZEN) - allowed the use of potions in MesGUI_Panel version of game

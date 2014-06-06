@@ -17,7 +17,7 @@ public class BasicMob implements Monster {
 		health = h;
 		damage = d;
 		speed = s;
-		butt = new Monster_Button(new ImageIcon("img/GrayMonster.png"),name);
+		butt = new Monster_Button(new ImageIcon("img/GrayMonster.png"),"img/GrayMonster.png",name);
 	}
 	public BasicMob(){
 		//undefined is the best defined
@@ -36,6 +36,18 @@ public class BasicMob implements Monster {
 	}
 	public int getHealth() {
 		return health;
+	}
+	public void setLevel(int lev){
+		level=lev;
+	}
+	public void setHealth(int heal){
+		health=heal;
+	}
+	public void setDamage(int dam){
+		damage=dam;
+	}
+	public void setSpeed(int spee){
+		speed=spee;
 	}
 	public void removeHealth(int hea){
 		if(health-hea>0)

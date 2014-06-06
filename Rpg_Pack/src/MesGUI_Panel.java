@@ -19,7 +19,6 @@ public class MesGUI_Panel extends JPanel {
 	//current monster MES_Panel.USER is fighting
 	public static Weapon W;
 	//current weapon MES_Panel.USER is using
-	//private boolean bool = true;
 	//used for figuring out if MES_Panel.USER mutilated the bodies for an extra level yet
 	private TreasureChest chest = new TreasureChest();
 	//instance of treasure chest for rewards
@@ -32,9 +31,10 @@ public class MesGUI_Panel extends JPanel {
 	//input from USER
 	private String name;
 	//represents player name
-	private JPanel panel2;
+	private static JPanel panel2;
 	private JFrame frame;
 	private JTextArea txtarea;
+	private static SaveLoad s = new SaveLoad();
 
   public MesGUI_Panel() {
 	  Dimension screensize= Toolkit.getDefaultToolkit().getScreenSize();
@@ -47,7 +47,7 @@ public class MesGUI_Panel extends JPanel {
       cols = (int)(rows*(width/height));
       grid = new JButton[rows][cols];
 	  panel2.setLayout(new GridLayout(rows,cols));
-	  ImageIcon icon = new ImageIcon("src/img/Tree3.png");
+	  ImageIcon icon = new ImageIcon("img/Tree3.png");
 	  Image ic = icon.getImage();
 	  ic = ic.getScaledInstance((int)width/cols,(int)height/rows,Image.SCALE_DEFAULT);
 	  icon.setImage(ic);
@@ -153,19 +153,19 @@ public class MesGUI_Panel extends JPanel {
 		  type = type.toLowerCase();
 		  if (type.equals("assassin")){
 			  MesGUI_Panel.USER = new Assassin(name);
-			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Brute.png"));
+			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Brute.png"),"img/Brute.png",name);
 		  }
 		  else if (type.equals("brute")){
 			  MesGUI_Panel.USER = new Brute(name);
-			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Brute.png"));
+			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Brute.png"),"img/Brute.png",name);
 		  }
 		  else if (type.equals("mage")){
 			  MesGUI_Panel.USER = new Mage(name);
-			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Warrior.png"));
+			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Warrior.png"),"img/Warrior.png",name);
 		  }
 		  else{
 			  MesGUI_Panel.USER = new Warrior(name);
-			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Warrior.png"));
+			  grid[5][cols/2] = new Player_Button(new ImageIcon("img/Warrior.png"),"img/Warrior.png",name);
 		  
 		  }
 		  M = pool.getMonster(USER.getLevel());
@@ -530,6 +530,40 @@ public class MesGUI_Panel extends JPanel {
 	  }  
 	  reDisplay();  
   }
+  public void saveGame(){
+	  s = new SaveLoad(USER,M,USER.getInventoryObject());
+	  s.saveGame();
+  }
+  public void loadGame(){
+	  s.loadGame();
+	  clearGrid();
+	  (Main_Runner.menu).clearMenus();
+	  USER = s.getUser();
+	  Player_Button butt = USER.getButton();
+	  USER.getButton().addKeyListener(new Keys());
+	  USER.getButton().addActionListener(new Buttons());
+	  grid[butt.getRow()][butt.getCol()] = butt;
+	  M = s.getMonster();
+	  Monster_Button mbutt = M.getButton();
+	  M.getButton().addKeyListener(new Keys());
+	  M.getButton().addActionListener(new Buttons());
+	  grid[mbutt.getRow()][mbutt.getCol()] = mbutt;
+	  Item[] items = s.getItems();
+	  W = (Weapon)items[0];
+	  (Main_Runner.menu).addSelectedWeapon(W.getName());
+	  for(int g = 1; g < items.length; g++){
+		  Item i = items[g];
+		  if (i instanceof Weapon)
+			  (Main_Runner.menu).addWeapon(i.getName());
+		  else if (i instanceof ArmorItem)
+			  (Main_Runner.menu).addArmor(i.getName());
+		  else if (i instanceof Potion && (((Potion)i).getEffect().equals("HEAL") || ((Potion)i).getEffect().equals("SWIFT")) )
+			  (Main_Runner.menu).addHelpfulPotion(i.getName());
+		  else if (i instanceof Potion )
+			  (Main_Runner.menu).addPainfulPotion(i.getName());
+	  }
+	  reDisplay();
+  }
   private class Buttons implements ActionListener { 
 	  public void actionPerformed(ActionEvent e) { 
 		  buttonClicked(e.getSource());
@@ -599,5 +633,25 @@ public class MesGUI_Panel extends JPanel {
 	  setVisible(true);
 	  grid[0][0].grabFocus();
 	  panel2 = panel;
+  }
+  public void clearGrid(){
+	  Dimension screensize= Toolkit.getDefaultToolkit().getScreenSize();
+	  double height = screensize.getHeight();
+      double width = screensize.getWidth();
+      height = ((int)height-((int)height/5)-40);
+      width = (int)width;
+	  ImageIcon icon = new ImageIcon("img/Tree3.png");
+	  Image ic = icon.getImage();
+	  ic = ic.getScaledInstance((int)width/cols,(int)height/rows,Image.SCALE_DEFAULT);
+	  icon.setImage(ic);
+	   for(int r = 0; r < rows; r++){
+		  for (int c = 0; c < cols; c++){
+			  grid[r][c] = new Tree_Button(icon);
+			  ((Tree_Button)grid[r][c]).setSpot(r,c);
+			  grid[r][c].addActionListener(new Buttons());
+			  grid[r][c].addKeyListener(new Keys());
+		  }
+	  }
+	  reDisplay();
   }
 }

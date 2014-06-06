@@ -26,7 +26,7 @@ public class BattleStats_Panel extends JPanel {
 		if ((MES_Panel.m)!= null)
 		txtarea.setText("Monsters Killed = "+(MES_Panel.USER).getMonstersKilled()+"\n\n"
 				+ "Monsters to kill before next level = "+(5-(MES_Panel.USER).getCurrentMonstersKilled())+"\n\n"
-				+ "You are fighting a: "+"\n"+(MES_Panel.m).getName()+": "+(MES_Panel.m).getStats());
+				+ "You are fighting a: "+"\n"+(MES_Panel.m).getStats());
 		else
 			txtarea.setText("Monsters Killed = "+(MES_Panel.USER).getMonstersKilled()+"\n\n"
 					+ "Monsters to kill before next level = "+(5-(MES_Panel.USER).getCurrentMonstersKilled())+"\n\n"

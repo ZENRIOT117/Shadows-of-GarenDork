@@ -8,6 +8,9 @@ public class Main_Runner {
 	public static GUI_Menubar menu;
 	private static Font segoe = new Font("Segoe UI", Font.PLAIN, 18);
 	private static JFrame fr;
+	public static MesGUI_Panel p4;
+	public static MES_Panel p1;
+	
 	public static void main(String[] args) {
 		 JFrame frame = new JFrame(); 
 		 Toolkit toolkit= Toolkit.getDefaultToolkit();
@@ -76,7 +79,7 @@ public class Main_Runner {
 					 f.setPreferredSize(screensize);
 					 Container pane = f.getContentPane(); 
 					 pane.setLayout( new BorderLayout() );
-					 MesGUI_Panel p4 = new MesGUI_Panel();
+					 p4 = new MesGUI_Panel();
 					 pane.add( p4, BorderLayout.CENTER);
 					 menu = new GUI_Menubar();
 					 f.setJMenuBar(menu);
@@ -100,7 +103,7 @@ public class Main_Runner {
 				 pane.setLayout( new BorderLayout() );
 				 Frame_Menubar menu = new Frame_Menubar();
 				 f.setJMenuBar(menu);
-				 MES_Panel p1 = new MES_Panel ();
+				 p1 = new MES_Panel ();
 				 p1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 				 Inventory_Panel p2 = new Inventory_Panel();
 				 p2.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
